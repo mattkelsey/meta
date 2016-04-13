@@ -20,6 +20,12 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('scriptsDebug', function() {
+    return gulp.src('js/*.js')
+        .pipe(gulp.dest('dist/js'))
+});
+
+
 gulp.task('html', function() {
     return gulp.src('*.html')
         .pipe(gulp.dest('dist'));
@@ -30,4 +36,5 @@ gulp.task('watch', function() {
     gulp.watch('scss/*.scss', ['sass']);
 });
 
-gulp.task('default', ['lint', 'scripts', 'html', 'watch']);
+gulp.task('default', ['lint', 'scriptsDebug', 'html', 'watch']);
+gulp.task('release', ['lint', 'scripts', 'html', 'watch'])
