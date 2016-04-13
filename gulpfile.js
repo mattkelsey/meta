@@ -13,16 +13,21 @@ gulp.task('lint', function() {
 
 gulp.task('scripts', function() {
     return gulp.src('js/*.js')
-        .pipe(concat('all.js'))
+        .pipe(concat('js/all.js'))
         .pipe(gulp.dest('dist'))
-        .pipe(rename('all.min.js'))
+        .pipe(rename('js/all.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist'));
 });
+
+gulp.task('html', function() {
+    return gulp.src('*.html')
+        .pipe(gulp.dest('dist'));
+})
 
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
     gulp.watch('scss/*.scss', ['sass']);
 });
 
-gulp.task('default', ['lint', 'scripts', 'watch']);
+gulp.task('default', ['lint', 'scripts', 'html', 'watch']);
