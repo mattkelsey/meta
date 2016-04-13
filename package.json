@@ -1,0 +1,26 @@
+{
+  "name": "meta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "metaTest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattkelsey/meta.git"
+  },
+  "author": "Matt Kelsey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattkelsey/meta/issues"
+  },
+  "homepage": "https://github.com/mattkelsey/meta#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  }
+}
