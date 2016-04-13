@@ -22,14 +22,14 @@ gulp.task('scripts', function() {
 
 gulp.task('scriptsDebug', function() {
     return gulp.src('js/*.js')
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('dist/js'));
 });
 
 
 gulp.task('html', function() {
     return gulp.src('*.html')
         .pipe(gulp.dest('dist'));
-})
+});
 
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
@@ -37,4 +37,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['lint', 'scriptsDebug', 'html', 'watch']);
-gulp.task('release', ['lint', 'scripts', 'html', 'watch'])
+gulp.task('release', ['lint', 'scripts', 'html', 'watch']);
