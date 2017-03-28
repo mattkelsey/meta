@@ -3,6 +3,7 @@ function controll3r(camera, scene) {
     this.controlsEnabled = true;
     this.hasPointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
+    this.collidableMeshList = [];
 
     this.init = function () {
         scene.add(this.controls.getObject());
@@ -78,16 +79,28 @@ function controll3r(camera, scene) {
             this.controls.getObject().translateY(velocity.y * delta);
             this.controls.getObject().translateZ(velocity.z * delta);
 
-            if (this.controls.getObject().position.y < 10) {
+            if (this.controls.getObject().position.y < 50) {
                 velocity.y = 0;
-                this.controls.getObject().position.y = 10;
+                this.controls.getObject().position.y = 50;
                 canJump = true;
             }
         }
+		// var localVertex = MovingCube.geometry.vertices[vertexIndex].clone();
+		// var globalVertex = localVertex.applyMatrix4( MovingCube.matrix );
+
+        var originPoint = camera.position.clone();
+
+        var directionVector = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
+
+        directionVector.addScalar(1/directionVector.length()); // make the vector 1 long but maintain angle
+
+		var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
+		var collisionResults = ray.intersectObjects( this.collidableMeshList );
+		if ( collisionResults.length > 0 && collisionResults[0].distance < 100 )
+			console.log(collisionResults[0].distance);
     };
 
     function onKeyDown (e) {
-        console.log("keydown");
         switch (e.keyCode) {
         case 38: // up
         case 87: // w
