@@ -85,19 +85,17 @@ function controll3r(camera, scene) {
                 canJump = true;
             }
         }
-		// var localVertex = MovingCube.geometry.vertices[vertexIndex].clone();
-		// var globalVertex = localVertex.applyMatrix4( MovingCube.matrix );
+	    var originPoint = camera.position.clone();
 
-        var originPoint = camera.position.clone();
+        var directionVector = new THREE.Vector3( 0, 0, -1 );
+        var world = directionVector.applyMatrix4( camera.matrixWorld );
+        var dir = world.sub( camera.position ).normalize();
 
-        var directionVector = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
-
-        directionVector.addScalar(1/directionVector.length()); // make the vector 1 long but maintain angle
-
-		var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
+		var ray = new THREE.Raycaster( originPoint,  dir);
 		var collisionResults = ray.intersectObjects( this.collidableMeshList );
-		if ( collisionResults.length > 0 && collisionResults[0].distance < 100 )
-			console.log(collisionResults[0].distance);
+		if ( collisionResults.length > 0 && Math.abs(collisionResults[0].distance) < 100) {
+			console.log("hit");
+        }
     };
 
     function onKeyDown (e) {
